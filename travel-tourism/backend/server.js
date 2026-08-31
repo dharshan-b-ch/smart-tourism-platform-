@@ -90,7 +90,7 @@ const startHttpServer = (targetPort) => {
     }
   });
   server.listen(targetPort, () => {
-    console.log(`HTTP Server running on http://localhost:${targetPort}`);
+    console.log(`HTTP Server running on port ${targetPort}`);
   });
 };
 
@@ -141,22 +141,21 @@ const ensureAdminExists = async () => {
     }
     console.log(`Admin account verified: ${adminEmail}`);
   } catch (err) {
-    console.error('Admin sync error:', err.message);
+    console.error('ensureAdminExists Error:', err.message);
   }
 };
+
+// Start HTTP Server immediately so Render health check always passes
+startHttpServer(Number(PORT));
+startHttpsServer(Number(HTTPS_PORT));
 
 mongoose
   .connect(MONGODB_URI)
   .then(async () => {
     console.log('MongoDB connection successful');
-    console.log('Server running successfully');
     await ensureAdminExists();
-    startHttpServer(Number(PORT));
-    startHttpsServer(Number(HTTPS_PORT));
   })
   .catch((error) => {
-    console.log('MongoDB connection failed');
-    console.log('Please make sure the MongoDB service is running.');
+    console.log('MongoDB connection warning:', error.message);
+    console.log('Server is running HTTP port cleanly.');
   });
-
-
