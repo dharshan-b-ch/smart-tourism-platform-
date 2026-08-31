@@ -4,7 +4,7 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "http://localhost:5000/api/:splat"
+  to = "https://smart-tourism-platform.onrender.com/api/:splat"
   status = 200
   force = true
 

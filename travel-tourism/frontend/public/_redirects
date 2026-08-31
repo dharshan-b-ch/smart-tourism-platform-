@@ -1,8 +1,2 @@
-# Netlify Redirects File
-# For Local Development / Proxy:
-/api/*  http://localhost:5000/api/:splat  200
-
-# When Backend is Deployed on Render/Railway, replace line above with:
-# /api/*  https://your-backend.onrender.com/api/:splat  200!
-
-/*      /index.html                       200
+/api/*  https://smart-tourism-platform.onrender.com/api/:splat  200!
+/*      /index.html                                             200
